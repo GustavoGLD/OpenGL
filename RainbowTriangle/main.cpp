@@ -95,9 +95,9 @@ int main(){
 
     float vertices[] = {
         //coordenada           //cor
-        -0.5f, -0.5f, 0.0f,    1.0f, 0.0f, 0.0f, //inferior direito
-         0.5f, -0.5f, 0.0f,    0.0f, 1.0f, 0.0f, //inferior esquerdo
-         0.0f,  0.5f, 0.0f,    0.0f, 0.0f, 1.0f  //superior
+        -0.5f, -0.5f, 0.0f,    1.0f, 1.0f, 0.0f, //inferior direito
+         0.5f, -0.5f, 0.0f,    1.0f, 0.0f, 1.0f, //inferior esquerdo
+         0.0f,  0.5f, 0.0f,    0.0f, 1.0f, 1.0f  //superior
     };
 
 

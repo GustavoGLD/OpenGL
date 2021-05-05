@@ -1,3 +1,7 @@
+//-----------------------------------------------
+//Esse aquivo cuidará dos vértices que passarmos
+//-----------------------------------------------
+
 //-----------------------------
 //Versão do OpenGL a ser usada
 #version 330 core

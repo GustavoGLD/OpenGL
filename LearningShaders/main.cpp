@@ -1,3 +1,12 @@
+//-----------------------------------------------------------
+//  O objetivo aqui é fazermos um  outro Triângulo Colorido,
+//  mas com as shaders em arquivos externos:
+//  fragmentShaders.fs  ---  vertexShader.vs
+//  E o nosso leitor dessas shaders:
+//  shader_s.cpp
+//-----------------------------------------------------------
+
+
 //-----------------------
 //Incluir bibliotecas
 #include "glad/glad.h"

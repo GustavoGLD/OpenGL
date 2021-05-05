@@ -1,3 +1,8 @@
+//---------------------------------------------
+//Esse código lerá e compilará nossas shaders
+//---------------------------------------------
+
+
 //----------------------------------------------
 //Sistema para esse header não ser lido 2 vezes
 #ifndef SHADER_H
@@ -139,6 +144,7 @@ public:
     void setFloat(const std::string &name, float value) const{
         glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
     }
+    #pragma endregion
     //--------------------------------------------------------
 };
 

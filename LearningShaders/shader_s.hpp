@@ -20,7 +20,7 @@
 //Classe Shader
 class Shader{
 public:
-    //Criando um ID para esse objeto Shader.
+    //Criando um ID para nosso ShaderProgram.
     unsigned int ID;
 
     //Criando um construtor para ler e compilar as shaders.

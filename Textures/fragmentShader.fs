@@ -28,5 +28,5 @@ void main()
     //-----------------------------------------------------------------------------------------
     //Definindo a cor final do pixel referente ao vértice
     //(uma mistura da cor dada [opcional] com a textura)
-	FragColor = texture(texture1, TexCoord) * ;
+	FragColor = texture(texture1, TexCoord) * vec4(ourColor, 1.0);
 }

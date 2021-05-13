@@ -10,8 +10,8 @@
 
 //-------------------------------------------------------------------------------
 //Inclusões
-#include "glad/glad.h"
-#include "glm/glm.hpp"
+#include "../Libs/glad/glad.h"
+#include "../Libs/glm/glm.hpp"
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -26,7 +26,7 @@ public:
 
     //---------------------------------------------------------------------------
     //Construtor que irá abrir, ler e compilar shader
-    Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr){
+    inline void newShader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr){
 
         //-----------------------------------------------------------------------
         //Shader em formato de string
@@ -147,7 +147,7 @@ public:
     //Usar Shader Program
     void use() 
     { 
-        glUseProgram(ID); 
+        glUseProgram(ID);
     }
 
     //-------------------------------------------------------------------------

@@ -14,6 +14,7 @@
 
 class Render {
 public:
+
     inline void RenderOurImage(Shader ourShader, int VAO, int directX, int directY){
         float a = sinf(glfwGetTime()) / 2 + 0.5f;
         glm::mat4 trans = glm::mat4(1.0f);

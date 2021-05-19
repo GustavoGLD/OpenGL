@@ -21,6 +21,9 @@ public:
 
         SettingUpBuffers();
         SettingUpTextures();
+
+        glEnable(GL_DEPTH_TEST);  
+
     }
 
     inline void Update(GLFWwindow* window){
@@ -38,7 +41,7 @@ public:
 
         float a = sinf(glfwGetTime()) / 2 + 0.5f;
 
-        model = glm::rotate(model, glm::radians(360.0f * a), glm::vec3(1.0f, 0.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(360.0f * a), glm::vec3(1.0f, 1.0f, 0.0f));
         view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -2.0f));
         proj  = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
 
@@ -51,7 +54,7 @@ public:
         glUniformMatrix4fv(projLoc,  1, GL_FALSE, glm::value_ptr(proj));
 
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
     inline void Finish(GLFWwindow* window){
@@ -59,7 +62,6 @@ public:
         //Deletando VAO, VBO e EBO para fechar o programa (opcional)
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);
-        glDeleteBuffers(1, &EBO);
     }
 
 };

@@ -5,8 +5,7 @@ Tudo nesse repositório foi feito (~~copiado~~) inspirado no https://learnopengl
 
 Execute os arquivos de saída (outputs) com `./nome_do_projeto` (linux)
 
-OBS.: Por algum motivo que ainda não sei, o botão de fechar janela não está funcionando. Feche o programa usando a tecla `esc`
-![](https://cdn.discordapp.com/attachments/741550250916970536/844993415317159936/unknown.png)
+OBS.: Por algum motivo que ainda não sei, o botão de fechar janela ( ![](https://cdn.discordapp.com/attachments/741550250916970536/844993415317159936/unknown.png) ) não está funcionando. Feche o programa usando a tecla `esc`
 
 Para compilar você mesmo os códigos, baixe o GLFW (linux: `sudo apt install libglfw3 libglfw3-dev`), e compile alguma `main.cpp` usando `clang++ main.cpp -o NovoPrograma glad.o -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi -ldl` (substitua `clang++` pelo seu compilador de preferência)
 

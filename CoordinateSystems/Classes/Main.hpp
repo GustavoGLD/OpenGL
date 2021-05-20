@@ -15,25 +15,25 @@ private:
 
 public:
     inline void Start(GLFWwindow* window){
-        //---------------------------------------------------
-        //Ler e compilar Shader; criar programa de Shaders
         ourShader.newShader("Classes/Shaders/vertexShader.vs", "Classes/Shaders/fragmentShader.fs");
-
         SettingUpBuffers();
         SettingUpTextures();
-
         glEnable(GL_DEPTH_TEST);  
-
     }
 
     inline void Update(GLFWwindow* window){
-        //-------------------------------------------------------------------
-        //Ligando a Textura, ShaderProgram, VAO e rederizando o Retangulo
         glBindTexture(GL_TEXTURE_2D, texture);
         glUseProgram(ourShader.ID);
-
         glBindVertexArray(VAO);
+        RenderOurCubes(ourShader, window, cubePositions);
+    }
 
+    inline void Finish(GLFWwindow* window){
+        glDeleteVertexArrays(1, &VAO);
+        glDeleteBuffers(1, &VBO);
+    }
+
+    inline void RenderOurCubes(Shader ourShader, GLFWwindow* window, glm::vec3 cubePositions[]){
         float radius = 10.0f;
         float camX   = sin(glfwGetTime()) * radius;
         float camZ   = cos(glfwGetTime()) * radius;
@@ -56,13 +56,6 @@ public:
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
-    }
-
-    inline void Finish(GLFWwindow* window){
-        //----------------------------------------------------------------------
-        //Deletando VAO, VBO e EBO para fechar o programa (opcional)
-        glDeleteVertexArrays(1, &VAO);
-        glDeleteBuffers(1, &VBO);
     }
 
 };

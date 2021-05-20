@@ -32,28 +32,28 @@ public:
         glBindTexture(GL_TEXTURE_2D, texture);
         glUseProgram(ourShader.ID);
 
-        int width, height;
-        glfwGetWindowSize(window, &width, &height);
-
-        float a = sinf(glfwGetTime()) / 2 + 0.5f;
         glBindVertexArray(VAO);
+
+        float radius = 10.0f;
+        float camX   = sin(glfwGetTime()) * radius;
+        float camZ   = cos(glfwGetTime()) * radius;
+        glm::mat4 view  = glm::mat4(1.0f);
+        view  = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        unsigned int viewLoc  = glGetUniformLocation(ourShader.ID, "view");
+        glUniformMatrix4fv(viewLoc,  1, GL_FALSE, glm::value_ptr(view));
+
+        glm::mat4 proj  = glm::mat4(1.0f);
+        int width, height; glfwGetWindowSize(window, &width, &height);
+        proj  = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
+        unsigned int projLoc  = glGetUniformLocation(ourShader.ID, "projection");
+        glUniformMatrix4fv(projLoc,  1, GL_FALSE, glm::value_ptr(proj));
+
         for(unsigned int i = 0; i < 10; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
-            glm::mat4 view  = glm::mat4(1.0f);
-            glm::mat4 proj  = glm::mat4(1.0f);
-            model = glm::rotate(model, glm::radians(360.0f * a), glm::vec3(1.0f, 1.0f, 0.0f));
-            view  = glm::translate(view, cubePositions[i]);
-            view  = glm::translate(view, glm::vec3(0.0, 0.0, -3.0));
-            proj  = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
-
+            model = glm::translate(model, cubePositions[i]);
             unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
-            unsigned int viewLoc  = glGetUniformLocation(ourShader.ID, "view");
-            unsigned int projLoc  = glGetUniformLocation(ourShader.ID, "projection");
-
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-            glUniformMatrix4fv(viewLoc,  1, GL_FALSE, glm::value_ptr(view));
-            glUniformMatrix4fv(projLoc,  1, GL_FALSE, glm::value_ptr(proj));
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
     }

@@ -12,16 +12,24 @@
 class Main : public Buffers, public Textures{
 private:
     Shader ourShader;
+    glm::vec3 cameraPos;
+    glm::vec3 cameraFront;
+    glm::vec3 cameraUp;
+    float deltaTime, time;
 
 public:
     inline void Start(GLFWwindow* window){
         ourShader.newShader("Classes/Shaders/vertexShader.vs", "Classes/Shaders/fragmentShader.fs");
         SettingUpBuffers();
         SettingUpTextures();
-        glEnable(GL_DEPTH_TEST);  
+        glEnable(GL_DEPTH_TEST);
+        cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
+        cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+        cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
     }
 
     inline void Update(GLFWwindow* window){
+
         glBindTexture(GL_TEXTURE_2D, texture);
         glUseProgram(ourShader.ID);
         glBindVertexArray(VAO);
@@ -34,13 +42,26 @@ public:
     }
 
     inline void RenderOurCubes(Shader ourShader, GLFWwindow* window, glm::vec3 cubePositions[]){
-        float radius = 10.0f;
-        float camX   = sin(glfwGetTime()) * radius;
-        float camZ   = cos(glfwGetTime()) * radius;
+        deltaTime = glfwGetTime() - time;
+        time = glfwGetTime();
+        std::cout << 1 / deltaTime << std::endl;
+        
+        const float cameraSpeed = 5.0f;
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+            cameraPos += cameraSpeed * cameraFront * deltaTime;
+        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+            cameraPos -= cameraSpeed * cameraFront * deltaTime;
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+            cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed * deltaTime;
+        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+            cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed * deltaTime;
+
         glm::mat4 view  = glm::mat4(1.0f);
-        view  = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        view  = glm::lookAt(cameraPos, cameraPos + cameraFront, glm::vec3(0.0f, 1.0f, 0.0f));
         unsigned int viewLoc  = glGetUniformLocation(ourShader.ID, "view");
         glUniformMatrix4fv(viewLoc,  1, GL_FALSE, glm::value_ptr(view));
+
+        //std::cout << cameraPos[0] << "\t" << cameraPos[1] << "\t" << cameraPos[2] << "\n\n";
 
         glm::mat4 proj  = glm::mat4(1.0f);
         int width, height; glfwGetWindowSize(window, &width, &height);

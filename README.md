@@ -3,6 +3,7 @@
 (*Meu melhor repositório*) Estudando Computação Gráfica usando as libs GLFW+GLAD em C++ hehehe 😜
 
 Linguagens: ![](https://cdn.discordapp.com/attachments/814473566031839263/846871603488751626/unknown.png)
+
 API's: ![](https://cdn.discordapp.com/attachments/814473566031839263/846871633826021376/unknown.png)
 
 Tudo nesse repositório foi feito (~~copiado~~) inspirado no https://learnopengl.com/ (uma delícia de site). Tudo que eu for aprendendo eu ponho aqui

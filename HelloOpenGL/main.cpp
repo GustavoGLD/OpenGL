@@ -6,11 +6,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
 //Dimensões da tela
-constexpr unsigned int SCR_WIDTH = 800;
-constexpr unsigned int SCR_HEIGHT = 600;
-
-//Nome da janela
-constexpr const char* WINDOW_TITLE = "HelloOpenGL by !Gustavo!";
+unsigned int SCR_WIDTH = 800;
+unsigned int SCR_HEIGHT = 600;
 
 int main(){
     //Iniciar GLFW
@@ -30,7 +27,7 @@ int main(){
     #endif
 
     //Criar a Janela
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, WINDOW_TITLE, NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "AprendaOpenGL", NULL, NULL);
 
     //Se a criação da janela deu erro (retornou nulo)
     if (window == NULL){

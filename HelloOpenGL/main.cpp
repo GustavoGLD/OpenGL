@@ -5,10 +5,6 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
-//Dimensões da tela
-unsigned int SCR_WIDTH = 800;
-unsigned int SCR_HEIGHT = 600;
-
 int main(){
     //Iniciar GLFW
     glfwInit();
@@ -26,8 +22,10 @@ int main(){
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
 
+
     //Criar a Janela
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "AprendaOpenGL", NULL, NULL);
+    GLFWwindow*  window = glfwCreateWindow(800, 600, "AprendaOpenGL", NULL, NULL);
+
 
     //Se a criação da janela deu erro (retornou nulo)
     if (window == NULL){
@@ -40,11 +38,12 @@ int main(){
         return -1;
     }
 
-    //Criar contexto OpenGL na janela em que acabamos de criar
-    glfwMakeContextCurrent(window);
-
     //Modificar buffers das dimensões da tela (usar glViewPort)
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+    //Criar contexto OpenGL na janela em que acabamos de criar
+    //Assim o GLAD será inicializado nessa janela
+    glfwMakeContextCurrent(window);
 
     //Carregar o GLAD, seguindo o sistema operacional em que está
     //Se a função retornar FALSE, o GLAD não foi carregado

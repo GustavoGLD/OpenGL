@@ -68,6 +68,8 @@ int main(){
 
         //Limpar buffers do GLFW
         glfwSwapBuffers(window);
+        
+        //Atualizar a verificação de input do GLFW
         glfwPollEvents();
     }
 
@@ -78,6 +80,9 @@ int main(){
 
 //Função sobre as dimensões da tela
 void framebuffer_size_callback(GLFWwindow* window, int width, int height){
+    
+    //dois primeiros parâmetros: deslocar tudo que ta dentro da janela
+    //dois ultimos parâmetros: distorcer o tamanho de tudo que ta dentro da janela
     glViewport(0, 0, width, height);
 }
 

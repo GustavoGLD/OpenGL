@@ -45,10 +45,7 @@ int main(){
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
-    }
+    gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
     #pragma endregion
 

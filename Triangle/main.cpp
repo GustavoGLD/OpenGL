@@ -2,55 +2,83 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+//Cabeçalho das funções
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
 
-const char *vertexShaderSource = 
+const char *vertexShaderSource =
+    //Versão do OpenGL (3.3) e core-profile
     "#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n" 
+    //Receber dado da VAO com local 0
+    "layout (location = 0) in vec3 aPos;\n"
+    //Função principal
     "void main()\n"
     "{\n"
+        //Setar o gl_Position. Ele vai levar o vértice para os proximos processos (output)
     "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    "}\0";
+    "}\n";
 
-const char *fragmentShaderSource = 
+
+const char *fragmentShaderSource =
+    //Versão do OpenGL (3.3) e core-profile
     "#version 330 core\n"
+    //Criar uma variável de outputs (não é pré-definida como o vertexShader)
     "out vec4 FragColor;\n"
+    //função principal
     "void main()\n"
     "{\n"
+        //Setar a variável de output para os próximos processos
     "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-    "}\n\0";
+    "}\n";
+
+
 
 int main(){
-    #pragma region Configurando janela...
     
+    //Iniciar GLFW
     glfwInit();
+
+    //Maior e menor versão do OpenGL para criar contextos. Somente OpenGL 3
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+
+    //Definir perfil como perfil-principal.
+    //Ou seja, descartar algumas coisas opcionais como compatibilidade com hardware antigo
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    
+
+    //Caso esse programa esteja em um dispositivo Apple
     #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
 
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Triangle by !Gustavo!", NULL, NULL);
+
+    //Criar a Janela
+    GLFWwindow*  window = glfwCreateWindow(800, 600, "AprendaOpenGL", NULL, NULL);
+
+    //Se a criação da janela deu erro (retornou nulo)
     if (window == NULL){
+
+        //Exibe a mensagem do erro
         std::cout << "Failed to create GLFW window" << std::endl;
+
+        //Finaliza GLFW e o programa
         glfwTerminate();
         return -1;
     }
-    glfwMakeContextCurrent(window);
+
+    //Modificar buffers das dimensões da tela (usar glViewPort)
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+    //Criar contexto OpenGL na janela em que acabamos de criar
+    //Assim o GLAD será inicializado nessa janela
+    glfwMakeContextCurrent(window);
+
+    //Carregar o GLAD, seguindo o sistema operacional em que está
+    //Se a função retornar FALSE, o GLAD não foi carregado
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
-    #pragma endregion
 
-
-    #pragma region VertexShader
 
     //Criar objeto para vertexSharde. Armazenar ID
     unsigned int vertexSharder = glCreateShader(GL_VERTEX_SHADER);
@@ -64,9 +92,6 @@ int main(){
     #pragma endregion
 
 
-
-
-    #pragma region Erro em compilar VertexShader?
 
     //Booleana do sucesso da compilação
     int sucess;
@@ -87,12 +112,9 @@ int main(){
         std::cout << "ERROR::SHADER::VERTEX::COMPULATION_FAILED\n" << infoLog << std::endl;
     }
 
-    #pragma endregion
 
 
 
-
-    #pragma region FragmentShader
 
     //Criar objeto para fragmentShader. Armazenar ID
     unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -103,11 +125,8 @@ int main(){
     //Compilar objeto `fragmentShader`
     glCompileShader(fragmentShader);
 
-    #pragma endregion
 
 
-
-    #pragma region Erro ao compilar FragmentShader?
 
     //Podemos aproivar as variáveis `sucess` e `infoLog[512]` ja existentes
 
@@ -124,12 +143,9 @@ int main(){
         std::cout << "ERROR::SHADER::FRAGMENT::COMPULATION_FAILED\n" << infoLog << std::endl;
     }
 
-    #pragma endregion
 
 
 
-
-    #pragma region shaderProgram
 
     //Criar shaderProgram
     unsigned int shaderProgram = glCreateProgram();
@@ -143,7 +159,6 @@ int main(){
     //Linkar os shaders uns aos outros
     glLinkProgram(shaderProgram);
 
-    #pragma endregion
 
 
 
@@ -154,7 +169,6 @@ int main(){
 
 
 
-    #pragma region Vertex Buffer Object e Vertex Array Object 
 
     //Coordenadas dos vértices do triângulo
     float vertices[] = {
@@ -191,8 +205,6 @@ int main(){
     //Desvincular VAO para evitar ser modificado
     glBindVertexArray(0);
 
-    #pragma endregion
-
 
 
 
@@ -221,15 +233,20 @@ int main(){
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
 
+
         //Limpando buffers do GLFW.
         glfwSwapBuffers(window);
+
+        //Atualizando verificação de Input do GLFW
         glfwPollEvents();
     }
 
     //Excluindo VAO.
     glDeleteVertexArrays(1, &VAO);
+
     //Excluindo VBO.
     glDeleteBuffers(1, &VBO);
+
     //Exlcuindo Program.
     glDeleteProgram(shaderProgram);
 
@@ -250,6 +267,10 @@ void processInput(GLFWwindow *window){
     }
 }
 
+//Função sobre as dimensões da tela
 void framebuffer_size_callback(GLFWwindow* window, int width, int height){
+    
+    //dois primeiros parâmetros: deslocar tudo que ta dentro da janela
+    //dois ultimos parâmetros: distorcer o tamanho de tudo que ta dentro da janela
     glViewport(0, 0, width, height);
 }

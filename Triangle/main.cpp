@@ -10,7 +10,7 @@ void processInput(GLFWwindow *window);
 const char *vertexShaderSource =
     //Versão do OpenGL (3.3) e core-profile
     "#version 330 core\n"
-    //Receber dado da VAO com local 0
+    //Receber dado da VAO de location 0
     "layout (location = 0) in vec3 aPos;\n"
     //Função principal
     "void main()\n"
@@ -76,7 +76,6 @@ int main(){
     glfwMakeContextCurrent(window);
 
     //Carregar o GLAD, seguindo o sistema operacional em que está
-    //Se a função retornar FALSE, o GLAD não foi carregado
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
 
@@ -193,11 +192,11 @@ int main(){
     //Passar o array de vertices criado para nosso VBO
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    //Instruindo como o VAO deve administrar esses vértices passados
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    //Instruindo como o VAO de location 0 deve administrar esses vértices passados
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-    //Usar a instrução dada acima
-    glEnableVertexAttribArray(0);
+    //Ativando a instrução dada acima para a VAO de location 0
+    glEnableVertexAttribArray(3);
 
     //Desvincular VBO para evitar ser modificado
     glBindBuffer(GL_ARRAY_BUFFER, 0);

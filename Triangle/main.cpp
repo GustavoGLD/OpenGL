@@ -193,10 +193,10 @@ int main(){
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     //Instruindo como o VAO de location 0 deve administrar esses vértices passados
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
     //Ativando a instrução dada acima para a VAO de location 0
-    glEnableVertexAttribArray(3);
+    glEnableVertexAttribArray(0);
 
     //Desvincular VBO para evitar ser modificado
     glBindBuffer(GL_ARRAY_BUFFER, 0);

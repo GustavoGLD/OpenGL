@@ -29,6 +29,7 @@ const char *fragmentShaderSource =
     "void main()\n"
     "{\n"
         //Setar a variável de output para os próximos processos
+        //Vamos deixar o output com a cor laranja
     "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
     "}\n";
 

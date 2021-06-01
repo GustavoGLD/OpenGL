@@ -89,7 +89,6 @@ int main(){
     //Compilar objeto `vertexShader`
     glCompileShader(vertexSharder);
 
-    #pragma endregion
 
 
 

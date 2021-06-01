@@ -78,7 +78,7 @@ int main(){
     return 0;
 }
 
-//Função sobre as dimensões da tela
+//Função sobre quando a janela for redimensionada
 void framebuffer_size_callback(GLFWwindow* window, int width, int height){
     
     //dois primeiros parâmetros: deslocar tudo que ta dentro da janela

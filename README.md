@@ -10,7 +10,7 @@ Tudo nesse repositório foi feito (~~copiado~~) inspirado no https://learnopengl
 
 Execute os arquivos de saída (outputs) com `./nome_do_projeto` (linux)
 
-OBS.: Se por acaso tiver o botão de fechar janela ( ![](https://cdn.discordapp.com/attachments/741550250916970536/844993415317159936/unknown.png) ) não está funcionando, feche o programa usando a tecla `esc` ( ![](https://cdn.discordapp.com/attachments/741550250916970536/844994020127146001/unknown.png) )
+OBS.: Se por acaso tiver o botão de fechar janela ( ![](https://cdn.discordapp.com/attachments/741550250916970536/844993415317159936/unknown.png) ) não funcionando, feche o programa usando a tecla `esc` ( ![](https://cdn.discordapp.com/attachments/741550250916970536/844994020127146001/unknown.png) )
 
 Para compilar você mesmo os códigos, baixe o GLFW e compile alguma `main.cpp` usando `clang++ main.cpp -o NovoPrograma glad.o -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi -ldl` (substitua `clang++` pelo seu compilador de preferência)
 

@@ -195,10 +195,10 @@ int main(){
     //Ativando a instrução dada acima para a VAO de location 0
     glEnableVertexAttribArray(0);
 
-    //Desvincular VBO para evitar ser modificado
+    //Desvincular VBO para evitar ser modificado (Opcional)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    //Desvincular VAO para evitar ser modificado
+    //Desvincular VAO para evitar ser modificado (Opcional)
     glBindVertexArray(0);
 
 
